@@ -2,13 +2,9 @@
 import { GoogleGenAI, Type, Chat } from "@google/genai";
 import { ChatMessage } from "../types";
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  console.error("Gemini API key is missing. Please set it in your environment variables.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY! });
+// FIX: Per coding guidelines, the API key must be obtained from `process.env.API_KEY`.
+// This also resolves the `import.meta.env` TypeScript error.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const recipeSchema = {
   type: Type.OBJECT,
