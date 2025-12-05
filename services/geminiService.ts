@@ -2,9 +2,13 @@
 import { GoogleGenAI, Type, Chat } from "@google/genai";
 import { ChatMessage } from "../types";
 
-// FIX: Per coding guidelines, the API key must be obtained from `process.env.API_KEY`.
-// This also resolves the `import.meta.env` TypeScript error.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const API_KEY = process.env.API_KEY;
+
+if (!API_KEY) {
+  throw new Error("API_KEY is not defined. Please create a .env file in the root of your project and add the line API_KEY=YOUR_API_KEY");
+}
+
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 const recipeSchema = {
   type: Type.OBJECT,
